@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #ffffff;
+            padding-top: 2rem;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 900px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            
+        }
+
+        h1 {
+            color: #5a4d82;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .menu-item {
+            background-color: #ffffff;
+            border: 1px solid #00796b;
+            border-radius: 12px;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+        }
+
+        .menu-item span {
+            font-size: 36px;
+            display: block;
+            margin-bottom: 10px;
+            color: #00796b;
+        }
+
+        .menu-item p {
+            font-size: 18px;
+            font-weight: 500;
+            color: #004d40;
+            margin: 0;
+        }
+
+        .logout {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .logout a span {
+            font-size: 30px;
+            color: #e57373;
+            cursor: pointer;
+        }
+
+        .logout a span:hover {
+            color: #d32f2f;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .footer a {
+            text-decoration: none;
+            color: #00796b;
+            font-weight: 500;
+        }
+
+        .footer img {
+            width: 50px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <br><br>
+        <h1>Menú</h1>
+        <div class="menu-grid">
+            <a href="{% url 'registrar_participante' %}" class="menu-item">
+                <span>👤</span> 
+                <p>Registrar participante</p>
+            </a>
+            <a href="{% url 'sesiones' %}" class="menu-item">
+                <span>📝</span> 
+                <p>Registrar asistencia</p>
+            </a>
+            <a href="{% url 'consulta_asistencia' %}" class="menu-item">
+                <span>🔍</span> 
+                <p>Consulta de asistencia</p>
+            </a>
+            <a href="{% url 'calcular_gastos' %}" class="menu-item">
+                <span>🍽️</span> 
+                <p>Calcular gastos de alimentación</p>
+            </a>
+            <a href="{% url 'administrar_usuarios' %}" class="menu-item">
+                <span>⚙️</span> 
+                <p>Administrar usuarios</p>
+            </a>
+            <!--
+            <a href="{% url 'emergencias' %}" class="menu-item">
+                <span>🚨</span> 
+                <p>Emergencias</p>
+            </a>-->
+    
+            <!-- Nuevas opciones de Perfil y Albergue -->
+            <a href="{% url 'perfil' %}" class="menu-item">
+                <span>🙍‍♂️</span>
+                <p>Perfil</p>
+            </a>
+            <a href="{% url 'albergue' %}" class="menu-item">
+                <span>🏠</span>
+                <p>Albergue</p>
+            </a>
+        </div>
+    
+        <div class="logout">
+            <a href="{% url 'logout' %}"><span>⏩</span></a>
+        </div>
+    </div>
+    
+
+    <div class="footer">
+        
+        <a target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Escudo_de_la_universidad_Mariano_G%C3%A1lvez_Guatemala.svg/800px-Escudo_de_la_universidad_Mariano_G%C3%A1lvez_Guatemala.svg.png" alt="UMG">
+        </a>
+        <p>UNIVERSIDAD MARIANO GÁLVEZ - COBÁN ALTA VERAPAZ</p>
+    </div>
+</body>
+</html>

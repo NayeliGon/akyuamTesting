@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Participantes</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 30px;
+        }
+        .table thead th {
+            background-color: #343a40;
+            color: white;
+        }
+        .table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+        .form-label {
+            font-weight: bold;
+        }
+        .btn-custom {
+            background-color: #5a4d82;
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: #7b477e;
+            color: white;
+        }
+        .navbar-custom {
+            background-color: #741e78; 
+          
+        }
+        .navbar-custom .navbar-brand {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-custom mb-4">
+        <a href="{% url 'home' %}" class="navbar-brand">
+            <i class="fas fa-home"></i> Inicio
+        </a>
+    </nav>
+
+  
+    <div class="container">
+        <h1 class="mb-4 text-center">Asistencias de {{ participante.nombre }}</h1>
+
+        <form method="get" class="mb-4">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="id_fecha_inicio" class="form-label">{{ form.fecha_inicio.label }}</label>
+                    {{ form.fecha_inicio }} 
+                    {% if form.fecha_inicio.errors %}
+                        <div class="text-danger">{{ form.fecha_inicio.errors }}</div>
+                    {% endif %}
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="id_fecha_fin" class="form-label">{{ form.fecha_fin.label }}</label>
+                    {{ form.fecha_fin }} <!-- Campo de fecha de fin -->
+                    {% if form.fecha_fin.errors %}
+                        <div class="text-danger">{{ form.fecha_fin.errors }}</div>
+                    {% endif %}
+                </div>
+               
+            </div>
+            <button type="submit" class="btn btn-custom btn-block">Buscar</button>
+        </form>
+
+        <!-- Resultados de la búsqueda -->
+        <h2 class="mb-3">Resultados de la búsqueda:</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Área de intervención</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sesion in resultados %}
+                    <tr>
+                        <td>{{ sesion.fecha }}</td>
+                        <td>{{ sesion.area_atencion }}</td>
+                        
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Costo total -->
+        <p class="mt-4"><strong>Cantidad total de sesiones encontradas: {{ total_resultados }}</strong> </p>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
