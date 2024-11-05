@@ -40,20 +40,20 @@ try:
     time.sleep(3)
 
     # Llenar el formulario de fechas y costo
-    fecha_inicio_input = driver.find_element(By.NAME, "fecha_inicio")
+    fecha_inicio_input = driver.find_element(By.ID, "id_fecha_inicio")
     fecha_inicio_input.clear()  # Limpiar cualquier valor preexistente
-    fecha_inicio_input.send_keys("01/01/2024")
+    fecha_inicio_input.send_keys("01/10/2024")
 
-    fecha_fin_input = driver.find_element(By.NAME, "fecha_fin")
+    fecha_fin_input = driver.find_element(By.ID, "id_fecha_fin")
     fecha_fin_input.clear()  # Limpiar cualquier valor preexistente
-    fecha_fin_input.send_keys("31/01/2024")
+    fecha_fin_input.send_keys("31/10/2024")
 
-    costo_comida_input = driver.find_element(By.NAME, "costo_comida")
+    costo_comida_input = driver.find_element(By.ID, "id_costo_por_comida")
     costo_comida_input.clear()  # Limpiar cualquier valor preexistente
     costo_comida_input.send_keys("50")
 
     # Hacer clic en el botón de "Buscar"
-    buscar_button = driver.find_element(By.XPATH, "//button[text()='Buscar']")
+    buscar_button = driver.find_element(By.XPATH, "//button[@type='submit' and contains(text(), 'Buscar')]")
     buscar_button.click()
 
     # Espera para ver el resultado (ajusta el tiempo si es necesario)
