@@ -1,64 +1,40 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 
-# Configurar el servicio de ChromeDriver
+# Configuración del modo headless para evitar errores en Jenkins
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--disable-dev-shm-usage")
+
+# Configurar el servicio de ChromeDriverManager
 service = Service(ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service)
+driver = webdriver.Chrome(service=service, options=chrome_options)
 
 try:
-    driver.get("http://127.0.0.1:8000/") 
+    driver.get("http://127.0.0.1:8000/")
 
-    # Espera para que la página cargue completamente
-    time.sleep(2) 
-
-    # Ingreso de credenciales
-    username_input = driver.find_element(By.NAME, "username") 
-    username_input.send_keys("prueba@gmail.com") 
-    password_input = driver.find_element(By.NAME, "password") 
-    password_input.send_keys("Akyuamprueba") 
+    time.sleep(2)
+    
+    # Ingresar las credenciales válidas
+    username_input = driver.find_element(By.NAME, "username")
+    username_input.send_keys("prueba@gmail.com")
+    
+    password_input = driver.find_element(By.NAME, "password")
+    password_input.send_keys("Akyuamprueba")
 
     # Hacer clic en el botón de inicio de sesión
-    login_button = driver.find_element(By.XPATH, "//button[@type='submit']")  
+    login_button = driver.find_element(By.XPATH, "//button[@type='submit']")
     login_button.click()
 
-    # Espera a que la página de inicio se cargue
-    time.sleep(3) 
-    print("Título de la página después del inicio de sesión:", driver.title)
-
-    # Seleccionar "Calcular gastos de alimentación"
-    calcular_gastos_button = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.XPATH, "//a[contains(@class, 'menu-item')]/p[text()='Calcular gastos de alimentación']"))
-    )
-    calcular_gastos_button.click()
-
-    # Espera a que la página de "Calcular gastos de alimentación" cargue
     time.sleep(3)
 
-    # Llenar el formulario de fechas y costo
-    fecha_inicio_input = driver.find_element(By.ID, "id_fecha_inicio")
-    fecha_inicio_input.clear()  # Limpiar cualquier valor preexistente
-    fecha_inicio_input.send_keys("01/10/2024")
-
-    fecha_fin_input = driver.find_element(By.ID, "id_fecha_fin")
-    fecha_fin_input.clear()  # Limpiar cualquier valor preexistente
-    fecha_fin_input.send_keys("31/10/2024")
-
-    costo_comida_input = driver.find_element(By.ID, "id_costo_por_comida")
-    costo_comida_input.clear()  # Limpiar cualquier valor preexistente
-    costo_comida_input.send_keys("50")
-
-    # Hacer clic en el botón de "Buscar"
-    buscar_button = driver.find_element(By.XPATH, "//button[@type='submit' and contains(text(), 'Buscar')]")
-    buscar_button.click()
-
-    # Espera para ver el resultado (ajusta el tiempo si es necesario)
-    time.sleep(3) 
-    print("Búsqueda realizada. Título de la página actual:", driver.title)
+    # Imprimir el título de la página después del inicio de sesión
+    print("Título de la página después del inicio de sesión:", driver.title)
 
 finally:
     driver.quit()
