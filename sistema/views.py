@@ -36,7 +36,6 @@ from .models import Participante
 from .forms import ParticipanteForm  
 from .utils import generar_numero_expediente  
 from django.contrib.auth.models import User
-from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.core.mail import send_mail
@@ -45,7 +44,6 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
-from . import notificacion_boton
 import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -615,18 +613,6 @@ def eliminar_usuario(request, user_id):
 
 
 
-@login_required
-def emergencias_view(request):
-    grupos_permitidos = ['Recepcion', 'Administrador']
-    if request.user.groups.filter(name__in=grupos_permitidos).exists():
-        return render(request, 'sistema/emergencias.html')
-    else:
-        return render(request, 'sistema/acceso_denegado.html', status=403)
-
-
-
-def boton_emergencia_view(request):
-    return render(request, 'sistema/boton_emergencia.html')
 
 
 def logout_view(request):
@@ -643,37 +629,6 @@ def logout_view(request):
 #Vista para manejar el envío de datos del boton de emergencia
 
 
-def envio_boton_view(request):
-    if request.method == 'POST':
-
-        #obtener codigo
-        data = json.loads(request.body)
-        codigo= data.get('codigo')
-
-        #consultar existencia de código en la base de datos
-
-        try:
-
-            participante = Participante.objects.get(id=codigo)
-            nombre = participante.nombre
-            apellido= participante.apellido
-            direccion = participante.direccion
-            telefono= participante.telefono
-
-
-    
-            print('Datos obtenidos',nombre,apellido, direccion, telefono)
-            notificacion_boton.enviar_mensaje(nombre,apellido,direccion, telefono)  # Funcion para enviar mensajes
-            return HttpResponse('Mensaje enviado')
-
-
-        except Participante.DoesNotExist:
-            print("No es participante de akyuam")
-            return HttpResponse('El código no es válido')
-    
-       
-    else:
-        return HttpResponse('Solicitud inválida', status=400)
 
 
 #Vista para listar las participantes

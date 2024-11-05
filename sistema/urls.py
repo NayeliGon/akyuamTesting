@@ -23,7 +23,6 @@ urlpatterns = [
 
     path('registrar-sesion/<int:participante_id>/',login_required( views.registrar_sesion_view), name='registrar_sesion'),  
     path('participante/<int:participante_id>/pdf/', participante_pdf, name='participante_pdf'),
-    path('emergencias/', login_required(views.emergencias_view), name='emergencias'),  
     #Consulta de asistencia de las participantes
     path('consulta-asistencia/', views.consulta_asistencia_view, name='consulta_asistencia'),
     path('fecha-asistencia/<int:participante_id>', views.fecha_asistencia_view, name='agregar_fecha'),
@@ -32,8 +31,6 @@ urlpatterns = [
     path('calcular-gastos/', login_required(buscar_participante_albergue), name='calcular_gastos'),  
     path('administrar-usuarios/', login_required(views.administrar_usuarios_view), name='administrar_usuarios'),  
     path('logout/', views.logout_view, name='logout'),  
-    path('boton-emergencia/', views.boton_emergencia_view, name='boton'), 
-    path('enviar-notificacion/', views.envio_boton_view, name='notificacion_emergencia'),
 
     path('restablecer-contrasena/<int:user_id>/', views.restablecer_contrasena_view, name='restablecer_contrasena'),
     path('registrar-idioma/', registrar_idioma, name='registrar_idioma'),

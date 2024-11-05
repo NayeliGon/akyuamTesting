@@ -15,10 +15,11 @@ try:
     time.sleep(2)  # Espera a que la página cargue
 
     # Ingreso de credenciales
+ # Ingreso de credenciales
     username_input = driver.find_element(By.NAME, "username") 
-    username_input.send_keys("akyuam.cejav@yahoo.es") 
+    username_input.send_keys("prueba@gmail.com") 
     password_input = driver.find_element(By.NAME, "password") 
-    password_input.send_keys("akYu4m1021") 
+    password_input.send_keys("Akyuamprueba") 
 
     # Hacer clic en el botón de inicio de sesión
     login_button = driver.find_element(By.XPATH, "//button[@type='submit']")  

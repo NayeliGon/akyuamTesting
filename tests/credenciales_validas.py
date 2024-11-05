@@ -14,7 +14,7 @@ try:
 
     time.sleep(2)  
     username_input = driver.find_element(By.NAME, "username") 
-    username_input.send_keys("administrador@gmail.com") 
+    username_input.send_keys("prueba@gmail.com") 
     password_input = driver.find_element(By.NAME, "password") 
     password_input.send_keys("Akyuamprueba") 
 
