@@ -6,15 +6,14 @@ from webdriver_manager.chrome import ChromeDriverManager
 import time
 
 # Configuramos las opciones para Chrome
-chrome_options = Options()
-chrome_options.add_argument("--headless")  # Modo headless
-chrome_options.add_argument("--no-sandbox")  # Solución para algunos entornos de CI como Jenkins
-chrome_options.add_argument("--disable-dev-shm-usage")  # Solución para sistemas con recursos limitados
+options = Options()
+options.add_argument('--headless')  # Ejecutar en modo headless
+options.add_argument('--no-sandbox')  # Importante para Jenkins
+options.add_argument('--disable-dev-shm-usage')  # Solución para sistemas con pocos recursos
 
-service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
-# Inicializamos el navegador con las opciones
-driver = webdriver.Chrome(service=service, options=chrome_options)
+
 
 try:
     driver.get("http://127.0.0.1:8000/")
