@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'sistema',  # Temporalmente comentado hasta que se cree la aplicación
     'tests'
 
 ]
