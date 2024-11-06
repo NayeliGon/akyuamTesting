@@ -8,7 +8,7 @@ driver = webdriver.Firefox(service=service)
 
 
 try:
-    driver.get("http://127.0.0.1:8000/")
+    driver.get("http://centro-akyuam.com:8000//")
 
     time.sleep(2)  
     username_input = driver.find_element(By.NAME, "username")
