@@ -1,17 +1,9 @@
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options  # Importamos las opciones
-from webdriver_manager.chrome import ChromeDriverManager
-import time
+from selenium.webdriver.firefox.service import Service
+from webdriver_manager.firefox import GeckoDriverManager
 
-# Configuramos las opciones para Chrome
-options = Options()
-options.add_argument('--headless')  # Ejecutar en modo headless
-options.add_argument('--no-sandbox')  # Importante para Jenkins
-options.add_argument('--disable-dev-shm-usage')  # Solución para sistemas con pocos recursos
-
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+service = Service(GeckoDriverManager().install())
+driver = webdriver.Firefox(service=service)
 
 
 
